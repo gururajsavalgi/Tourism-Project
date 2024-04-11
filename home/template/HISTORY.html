@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}VISITED PLACE{% endblock title %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <h3 class="my-3">THANK YOU FOR VISITING THIS PLACE</h3>
+    <ul>
+    <li class="my-3">your guide name is :{{guide.name}}</li>
+    <li>your guide phone number is :{{guide.phone}}</li>
+    </ul>
+</div>
+<h1>Give Rating :{{service.placename}}</h1>
+  
+  <form id="ratingForm">
+    <fieldset class="rating">
+      <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+      <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+      <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+      <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+      <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+    </fieldset>
+    <button type="submit">Submit Rating</button>
+  </form>
+
+  <script>
+    document.getElementById('ratingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var rating = document.querySelector('input[name="rating"]:checked').value;
+      alert('You rated ' + rating + ' stars.');
+      // Here you can send the rating to your server or perform any other action
+    });
+  </script>
+  
+
+{% endblock body %}

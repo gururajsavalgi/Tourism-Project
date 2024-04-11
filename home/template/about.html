@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{about.placename}}{% endblock title %}
+{% block body %}
+{% load static %}
+
+<div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <style>
+        img {
+          max-width: 100%;
+          height: 300px; /* This maintains the image's aspect ratio */
+          
+        }
+      </style>
+      
+      <div class="carousel-item active my-3">
+        <img src="{% if about.image %}{% static about.image.url %}{% endif %}" style="display: block; margin: 0 auto;">
+      </div>
+      <div class="carousel-item my-3">
+        <img src="{% if about.image1 %}{% static about.image1.url %}{% endif %}" style="display: block; margin: 0 auto;"">
+      </div>
+      <div class="carousel-item my-3">
+        <img src="{% if about.image2 %}{% static about.image2.url %}{% endif %}" style="display: block; margin: 0 auto;"">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+    <div class="container my-4">
+      <h5 style="text-align:center;">{{about.placename}}</h5>
+      <p style="text-align:center;">{{about.description}}</p>
+  </div>
+  
+{% endblock body %}

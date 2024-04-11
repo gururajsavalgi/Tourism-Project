@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html lang="ar">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
+    
+
+    <title>{% block title %}{% endblock title %} GURURAJ</title>
+    
+  </head>
+  <body>
+{% load static %}
+<div class="container my-6">
+    <h3 class="form-floating my-4" style="text-align: center;" ><b>GUIDE DETAILS</b></h3>
+    <form action="" method="post">
+      {% csrf_token %}
+    <div class="form-floating my-3">
+    <label for="floatingInput">Enter your name</label>
+    <input type="Name" class="form-control" name="name" placeholder="Enter your name">
+    
+  </div>
+  <div class="form-floating my-3">
+    <label for="phoneInput">phone</label>
+    <input type="tel" class="form-control" name="phone" placeholder="Enter your phone number">
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+</div>
+<h1>Rating Representation</h1>
+  
+  <div class="rating" id="rating"></div>
+
+  <script>
+    // Replace this with your actual rating value
+    var ratingValue = 4;
+
+    // Create stars based on the rating value
+    var ratingContainer = document.getElementById('rating');
+    for (var i = 1; i <= 5; i++) {
+      var star = document.createElement('span');
+      star.className = 'star' + (i <= ratingValue ? ' filled' : '');
+      star.innerHTML = '&#9733;';
+      ratingContainer.appendChild(star);
+    }
+  </script>
+{% block body %} {% endblock body %}
+</body>
+</html>

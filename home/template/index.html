@@ -8,21 +8,21 @@
       
       {% for i in Index %}
       <div class="col">
-        <div class="card shadow-sm">
-          <img src="{% if i.image %}{% static i.image.url %}{% endif %}" class="img-thumbnail" alt="...">
+        <div class="circle-container">
+          <a href="about/{{i.id}}"> <img src="{% if i.image %}{% static i.image.url %}{% endif %}" id="qv{{i.id}}" alt="..."></a>
+        </div>
           <div class="card-body">
             <h4 class="card-text" style="text-align: center;">{{i.placename}}</h4>
             <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group" style="text-align: center;">
-                <ul>
-
-                <li><a href="about/{{i.id}}"><button id="qv{{i.id}}" type="button" class="btn btn-sm btn-outline-secondary">About</button></a></li>
-              
-                <li><a href="services/{{i.id}}"><button id="pr{{i.id}}" type="button" class="btn btn-sm btn-outline-secondary">Book Tourist guide</button></a></li>
-                </ul>
+              <div class="btn-group">
+                <div class="btn1">
+                <p>{{i.category}}</p>
+                <p>{{i.subcategory}}</p>
+                <a href="services/{{i.id}}"><button id="pr{{i.id}}" type="button" class="btn btn-sm btn-outline-secondary">Book Tourist guide</button></a></li>
+                </div>
+                <p>guru</p>
               </div>
-              <small class="text-body-secondary">9 mins</small>
-            </div>
+              <p>guru</p>
           </div>
         </div>
       </div>

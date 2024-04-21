@@ -2,14 +2,12 @@
 {% block title %}contacts{% endblock title %}
 {% block body %}
 {% load static %}
-<div class="container my-4">
-    <div class="row">
-    <div class="col-md-4">
-    <div class="row">
+
+<div class="container">
+    <div class="circle-row">
        <img src="{% if service.image %}{% static service.image.url %}{% endif %}" width="233px" height="385px">
     </div>
-        </div>
-    <div class="col-md-8">
+    <div class="col1">
         <ul>
         <li class="my-3">PLACE NAME :{{service.placename}}</li>
         <li class="my-3">GUIDE PRICE PER PERSON IS <b>{{service.price}} RS</b></li>
@@ -19,24 +17,42 @@
         
         <button onclick="calculateBill()">Calculate Bill</button>
         <p id="totalBill"></p>
-        <form action="" method="post">
+        <form action="HISTORY/" method="post" onsubmit="return validateForm()">
             {% csrf_token %}
-       
         <div>
-        <label for="quantity">ENTER YOUR NAME:</label>
-        <input type="text" id="name" class ="form-control my-3" placeholder="Enter your name">
+            <input type="hidden" id="placename" name="placename" value="{{ service.placename }}">
         </div>
-        <div>
-        <label for="quantity">ENTER YOUR PHONE NUMBER:</label>
-        <input type="number" id="num" class ="form-control my-3" placeholder="Enter your number">
+       
+        <div class="form">
+        <label for="name">ENTER YOUR NAME:</label>
+        <input type="text" id="name" class ="form-control" placeholder="Enter your name" required><br><br>
+        </div>
+        <div class="form">
+        <label for="phoneInput">ENTER YOUR PHONE NUMBER:</label>
+        <input type="number" id="num" class ="form-control" placeholder="Enter your number" required><br><br>
         </div>
         
-        <a href="HISTORY/"><button  type="button" class="btn btn-sm btn-outline-secondary">SUBMIT</button>
+        <button  type="submit" class="btn btn-sm btn-outline-secondary">SUBMIT</button>
+    </form>
     </div>
-    </div>
-        </div>
-    </div>
+</div>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("num").value;
     
+            if (name.length == 0 || phone.length == 0) {
+                alert("Name and phone number are required fields.");
+                return false; // Prevent form submission
+            }
+            if (phone.length != 10) {
+                alert("Phone number should be 10 digits long.");
+                return false;
+            }
+            return true;
+        }
+    </script>
     <script>
         function calculateBill() {
             // Get the quantity input value

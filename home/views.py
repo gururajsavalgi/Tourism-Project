@@ -2,16 +2,17 @@
 from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User, auth
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate,login
 from django.http import JsonResponse
 import random
 
 #from .models import User
-from .models import Index, Contact,Guide_detail
+from .models import Index, Contact,Guide_detail,Customer_detail
 # Create your views here.
 def index(request):
     if request.user.is_anonymous:
         return redirect("/login")
+    
     Indexs=Index.objects.all()
     n=len(Indexs)
     params={ 'Index':Indexs}
@@ -32,6 +33,7 @@ def contact(request):
     return render(request,"contact.html")
 
 def about(request, myid):
+    print(request.user)
     if request.user.is_anonymous:
         return redirect("/login")
     about = Index.objects.filter(id=myid)
@@ -47,7 +49,7 @@ def services(request, myid):
     print(service)
     return render(request,"services.html", {'service':service[0]})
 
-def login(request):
+def loginUser(request):
     if request.method=="GET":
       return render(request,"login.html")
 
@@ -60,13 +62,13 @@ def login(request):
         print(password)
         user = authenticate(username=username, password=password)
         print(username, password)
-        print(user)
+
         if user is not None:
             # A backend authenticated the credentials
-            
+            login(request,user)
+            messages.success(request, "You have logged in successfully!")
             return redirect('index')
         else:
-            
             return render(request, 'login.html')
 
 def logoutuser(request):
@@ -97,3 +99,13 @@ def guide(request):
         else:
             guide = random.choice(guide)
         return render(request, 'HISTORY.html',{'guide':guide})
+def customer(request):
+        if request.method=="POST":
+            name=request.POST.get('name','')
+            print(name)
+            phone=request.POST.get('num','')
+            placename=request.POST.get('placename','')
+
+            customer = Customer_detail(name=name, phone=phone,placename=placename)
+            customer.save()
+        return redirect('guide')

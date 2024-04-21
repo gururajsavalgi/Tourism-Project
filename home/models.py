@@ -37,6 +37,7 @@ class Customer_detail(models.Model):
     msg_id=models.AutoField(primary_key=True)
     name=models.CharField(max_length=50)
     phone=models.CharField(max_length=50, default="")
+    placename=models.CharField(max_length=50, default="")
     def __str__(self):
         return self.name
 

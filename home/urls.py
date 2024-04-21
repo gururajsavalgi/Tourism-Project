@@ -9,11 +9,11 @@ urlpatterns = [
     path("contact/",views.contact,name="contact"),
     path("about/<int:myid>",views.about,name="about"),
     path("services/<int:myid>",views.services,name="services"),
-    path("login/",views.login,name="login"),
+    path("login/",views.loginUser,name="login"),
     path("logout/",views.logoutuser,name="logout"),
     path("sign_in/",views.sign,name="sign"),
     path('guide/',views.guide,name="guide"),
-    path('services/HISTORY/',views.guide,name="guide"),
+    path('services/HISTORY/',views.customer,name="customer"),
 
     
 ]

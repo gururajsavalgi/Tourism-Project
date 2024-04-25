@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Hello.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'C:\Users\gurur\OneDrive\Desktop\web development\hello\Hello\home\template',],
+        'DIRS': [r'C:\Users\gurur\OneDrive\Desktop\Tourism-Project\home\template',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

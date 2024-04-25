@@ -9,7 +9,7 @@
       {% for i in Index %}
       <div class="col">
         <div class="circle-container">
-          <a href="about/{{i.id}}"> <img src="{% if i.image %}{% static i.image.url %}{% endif %}" id="qv{{i.id}}" alt="..."></a>
+          <a href="about/{{i.msg_id}}"><img src="{% if i.image %}{% static i.image.url %}{% endif %}" id="qv{{i.msg_id}}" alt="..."></a>
         </div>
           <div class="card-body">
             <h4 class="card-text" style="text-align: center;">{{i.placename}}</h4>
@@ -18,7 +18,7 @@
                 <div class="btn1">
                 <p>{{i.category}}</p>
                 <p>{{i.subcategory}}</p>
-                <a href="services/{{i.id}}"><button id="pr{{i.id}}" type="button" class="btn btn-sm btn-outline-secondary">Book Tourist guide</button></a></li>
+                <a href="services/{{i.msg_id}}"><button id="pr{{i.msg_id}}" type="button" class="btn btn-sm btn-outline-secondary">Book Tourist guide</button></a></li>
                 </div>
                 <p>guru</p>
               </div>

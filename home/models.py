@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 
 
 
@@ -13,8 +14,11 @@ class login(models.Model):
     username=models.CharField(max_length=50)
     password=models.CharField(max_length=50)
 class Index(models.Model):
-    place_id = models.AutoField
+    msg_id=models.AutoField(primary_key=True)
     placename=models.CharField(max_length=50)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
+    review=models.TextField(default="")
+    rating=models.FloatField(default=0.0)
     category = models.CharField(max_length=50, default="")
     subcategory = models.CharField(max_length=50, default="")
     price = models.IntegerField(default=0)
@@ -37,7 +41,8 @@ class Customer_detail(models.Model):
     msg_id=models.AutoField(primary_key=True)
     name=models.CharField(max_length=50)
     phone=models.CharField(max_length=50, default="")
-    placename=models.CharField(max_length=50, default="")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    Customer_id = models.CharField(max_length=10000000, default="")
     def __str__(self):
         return self.name
 

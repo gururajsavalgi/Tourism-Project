@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import logout, authenticate,login
 from django.http import JsonResponse
 import random
-
+from django.db.models import Case, When
 #from .models import User
 from .models import Index, Contact,Guide_detail,Customer_detail
 # Create your views here.
@@ -22,9 +22,7 @@ def contact(request):
     if request.user.is_anonymous:
         return redirect("/login")
     if request.method=="POST":
-        print(request)
         name=request.POST.get('name','')
-        print(name)
         email=request.POST.get('email','')
         phone=request.POST.get('phone','')
         desc=request.POST.get('desc','')
@@ -36,7 +34,7 @@ def about(request, myid):
     print(request.user)
     if request.user.is_anonymous:
         return redirect("/login")
-    about = Index.objects.filter(id=myid)
+    about = Index.objects.filter(msg_id=myid)
     print(about)
 
 
@@ -45,7 +43,7 @@ def about(request, myid):
 def services(request, myid):
     if request.user.is_anonymous:
         return redirect("/login")
-    service = Index.objects.filter(id=myid)
+    service = Index.objects.filter(msg_id=myid)
     print(service)
     return render(request,"services.html", {'service':service[0]})
 
@@ -54,12 +52,8 @@ def loginUser(request):
       return render(request,"login.html")
 
     if request.method=="POST":
-        print("Hiiiiiiiiiiiii")
         username=request.POST.get("username")
         password=request.POST.get("password")
-        print(username)
-        print("Hiiiiiiiiiiiii")
-        print(password)
         user = authenticate(username=username, password=password)
         print(username, password)
 
@@ -101,11 +95,25 @@ def guide(request):
         return render(request, 'HISTORY.html',{'guide':guide})
 def customer(request):
         if request.method=="POST":
+            user = request.user
             name=request.POST.get('name','')
             print(name)
             phone=request.POST.get('num','')
-            placename=request.POST.get('placename','')
+            msg_id=request.POST.get('msg_id','')
 
-            customer = Customer_detail(name=name, phone=phone,placename=placename)
+            customer = Customer_detail(name=name, phone=phone,Customer_id=msg_id,user=user)
             customer.save()
-        return redirect('guide')
+            return redirect('guide')
+        customer = Customer_detail.objects.filter(user=request.user)
+        print(customer)
+        ids = []
+        for i in customer:
+            ids.append(i.Customer_id)
+        print(len(ids))
+        print(ids)
+        preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ids)])
+        index = Index.objects.filter(msg_id__in=ids).order_by(preserved)
+        print(len(index))
+        print(index)
+
+        return render(request, 'VisitedPlace.html', {'customer': index,'customern':customer})

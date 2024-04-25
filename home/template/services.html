@@ -18,18 +18,18 @@
         <button onclick="calculateBill()">Calculate Bill</button>
         <p id="totalBill"></p>
         <form action="HISTORY/" method="post" onsubmit="return validateForm()">
-            {% csrf_token %}
+        {% csrf_token %}
         <div>
-            <input type="hidden" id="placename" name="placename" value="{{ service.placename }}">
+            <input type="hidden" id="msg_id" name="msg_id" value="{{ service.msg_id}}">
         </div>
        
         <div class="form">
         <label for="name">ENTER YOUR NAME:</label>
-        <input type="text" id="name" class ="form-control" placeholder="Enter your name" required><br><br>
+        <input type="text" id="name" name='name' class ="form-control" placeholder="Enter your name" required><br><br>
         </div>
         <div class="form">
         <label for="phoneInput">ENTER YOUR PHONE NUMBER:</label>
-        <input type="number" id="num" class ="form-control" placeholder="Enter your number" required><br><br>
+        <input type="number" id="num" name='num' class ="form-control" placeholder="Enter your number" required><br><br>
         </div>
         
         <button  type="submit" class="btn btn-sm btn-outline-secondary">SUBMIT</button>

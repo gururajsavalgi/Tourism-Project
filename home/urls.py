@@ -14,6 +14,7 @@ urlpatterns = [
     path("sign_in/",views.sign,name="sign"),
     path('guide/',views.guide,name="guide"),
     path('services/HISTORY/',views.customer,name="customer"),
+    path('about/',views.customer,name="customer"),
 
     
 ]

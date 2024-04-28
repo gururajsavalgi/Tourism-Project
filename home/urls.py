@@ -15,6 +15,7 @@ urlpatterns = [
     path('guide/',views.guide,name="guide"),
     path('services/HISTORY/',views.customer,name="customer"),
     path('about/',views.customer,name="customer"),
+    path('search/',views.search,name="search"),
 
     
 ]

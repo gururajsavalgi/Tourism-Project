@@ -3,35 +3,23 @@
 {% block body %}
 {% load static %}
 
-<h1 class="my-2 text-center">SELECT THE PLACE</h1>
+<h1 class="my-2 text-center">VISITED PLACES</h1>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     {% if customer|length < 1 %}
-        <h3 style="text-align: center; padding-top: 5%;">You have no Video in your Watch Later</h3>
+        <h3 style="text-align: center; padding-top: 5%;">YOU HAVE NOT VISITED ANY PLACES</h3>
     {% endif %}
   
   {% for i in customer reversed %}
   <div class="col">
     <div class="circle-container">
-      <img src="{% if i.image %}{% static i.image.url %}{% endif %}" id="qv{{i.msg_id}}" alt="..."></a>
+      <img src="{% if i.image %}{% static i.image.url %}{% endif %}" id="qv{{i.msg_id}}" alt="...">
     </div>
       <div class="card-body">
         <h4 class="card-text" style="text-align: center;">{{i.placename}}</h4>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            {% for j in customern %}
-            <div class="btn1">
-            <p>Visitor name: <b>{{j.name}}</b></p>
-            <p>phone number :<b>{{j.phone}}</b></p>
-            </div>
-            {% endfor %}
-          </div>
-          <p>e</p>
-      </div>
-      <p>e</p>
+        <div>
+    </div>
     </div>
   </div>
   {% endfor %}
-  
-  
 </div>
 {% endblock body %}

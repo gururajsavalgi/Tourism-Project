@@ -4,7 +4,7 @@
 {% load static %}
 
     <h1 class="my-2 text-center">SELECT THE PLACE</h1>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols1-md-3 g-3">
       
       {% for i in Index %}
       <div class="col">
@@ -20,9 +20,7 @@
                 <p>{{i.subcategory}}</p>
                 <a href="services/{{i.msg_id}}"><button id="pr{{i.msg_id}}" type="button" class="btn btn-sm btn-outline-secondary">Book Tourist guide</button></a></li>
                 </div>
-                <p>guru</p>
               </div>
-              <p>guru</p>
           </div>
         </div>
       </div>

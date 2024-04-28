@@ -3,11 +3,11 @@
 {% block body %}
 <div class="container my-6">
     <h3 class="form-floating my-4" style="text-align: center;" ><b>Contact us</b></h3>
-    <form action="" method="post">
+    <form action="" method="post" id="myForm" onsubmit="return validateForm()">
       {% csrf_token %}
     <div class="form-floating my-3">
     <label for="floatingInput">Enter your name</label>
-    <input type="Name" class="form-control" name="name" placeholder="Enter your name">
+    <input type="Name" class="form-control" id="name" name="name" placeholder="Enter your name">
     
   </div>
   <div class="form-floating my-3">
@@ -16,13 +16,31 @@
   </div>
   <div class="form-floating my-3">
     <label for="phoneInput">phone</label>
-    <input type="tel" class="form-control" name="phone" placeholder="Enter your phone number">
+    <input type="tel" class="form-control" id="num" name="phone" placeholder="Enter your phone number">
   </div>
   <div class="form-floating my-3">
     <textarea class="form-control" placeholder="Leave a comment here" name="desc"></textarea>
     <label for="floatingTextarea">Comments</label>
   </div>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" onclick="submitForm()" class="btn btn-success">Submit</button>
 </form>
+
+
+    <script>
+      function validateForm() {
+          var name = document.getElementById("name").value;
+          var phone = document.getElementById("num").value;
+  
+          if (name.length == 0 || phone.length == 0) {
+              alert("Name and phone number are required fields.");
+              return false; // Prevent form submission
+          }
+          if (phone.length != 10) {
+              alert("Phone number should be 10 digits long.");
+              return false;
+          }
+          return true;
+      }
+  </script>
 </div>
 {% endblock body %}

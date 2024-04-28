@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 
+
 # Create your models here.
 class Sign_in(models.Model):
     username=models.CharField(max_length=50)
@@ -16,9 +17,6 @@ class login(models.Model):
 class Index(models.Model):
     msg_id=models.AutoField(primary_key=True)
     placename=models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
-    review=models.TextField(default="")
-    rating=models.FloatField(default=0.0)
     category = models.CharField(max_length=50, default="")
     subcategory = models.CharField(max_length=50, default="")
     price = models.IntegerField(default=0)

@@ -8,14 +8,17 @@ import random
 from django.db.models import Case, When
 #from .models import User
 from .models import Index, Contact,Guide_detail,Customer_detail
+from itertools import chain
+
 # Create your views here.
 def index(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    
+    if request.user.is_authenticated:
+        username = request.user.username
     Indexs=Index.objects.all()
     n=len(Indexs)
-    params={ 'Index':Indexs}
+    params={ 'Index':Indexs,'username': username}
     return render(request, 'index.html', params)
 
 def contact(request):
@@ -74,7 +77,6 @@ def sign(request):
     if request.method=='POST':
         username=request.POST.get('username')
         email=request.POST.get('email')
-        print("hiiiiiiiiii")
         password1=request.POST.get('password1')
         password2=request.POST.get('password2')
         if password1!=password2:
@@ -109,11 +111,26 @@ def customer(request):
         ids = []
         for i in customer:
             ids.append(i.Customer_id)
-        print(len(ids))
-        print(ids)
         preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ids)])
         index = Index.objects.filter(msg_id__in=ids).order_by(preserved)
         print(len(index))
         print(index)
 
         return render(request, 'VisitedPlace.html', {'customer': index,'customern':customer})
+def search(request):
+    query=request.GET['query']
+    print(len(query))
+    if len(query)>80 and len(query)==0:
+        allpost=Index.objects.none()
+    else:
+        placename=Index.objects.filter(placename__icontains=query)
+        category=Index.objects.filter(category__icontains=query)
+        subcategory=Index.objects.filter(subcategory__icontains=query)
+        allpost=list(chain(placename, category,subcategory))
+    if len(allpost)==0:
+        messages.warning(request,"No search result found.")
+
+    return render(request, 'SEARCH.html',{'allPosts':allpost})
+
+
+    

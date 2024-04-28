@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/login1.css">
     <title>Sign in</title>
 </head>
 <body>
     <main class="form-signin w-100 m-auto">
         <form method="POST" action="">
           {% csrf_token %}
-          <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 class="normal">Please sign in</h1>
       
           <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" name="username" placeholder="username">
             <label for="floatingInput">username</label>
           </div>
           <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="email">
+            <input type="email" class="form-control" id="floatingInput1" name="email" placeholder="email">
             <label for="floatingInput">email</label>
           </div>
           <div class="form-floating">
@@ -29,14 +29,16 @@
             <label for="floatingPassword">Password2</label>
           </div>
       
-          <div class="form-check text-start my-3">
+          <div class="form-floating text-start my-3">
             <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Remember me
             </label>
           </div>
-          <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-          <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+          <div class="form-floating my-3">
+          <button type="submit">Sign in</button>
+        </div>
+          <p class="form-floating">&copy; 2017–2024</p>
         </form>
       </main>
       <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

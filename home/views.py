@@ -1,7 +1,7 @@
 
 from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate,login
 from django.http import JsonResponse
 import random
@@ -38,7 +38,6 @@ def about(request, myid):
     if request.user.is_anonymous:
         return redirect("/login")
     about = Index.objects.filter(msg_id=myid)
-    print(about)
 
 
     return render(request, 'about.html', {'about':about[0]})
@@ -47,7 +46,6 @@ def services(request, myid):
     if request.user.is_anonymous:
         return redirect("/login")
     service = Index.objects.filter(msg_id=myid)
-    print(service)
     return render(request,"services.html", {'service':service[0]})
 
 def loginUser(request):
@@ -58,7 +56,6 @@ def loginUser(request):
         username=request.POST.get("username")
         password=request.POST.get("password")
         user = authenticate(username=username, password=password)
-        print(username, password)
 
         if user is not None:
             # A backend authenticated the credentials
@@ -99,7 +96,6 @@ def customer(request):
         if request.method=="POST":
             user = request.user
             name=request.POST.get('name','')
-            print(name)
             phone=request.POST.get('num','')
             msg_id=request.POST.get('msg_id','')
 
@@ -113,13 +109,10 @@ def customer(request):
             ids.append(i.Customer_id)
         preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ids)])
         index = Index.objects.filter(msg_id__in=ids).order_by(preserved)
-        print(len(index))
-        print(index)
 
         return render(request, 'VisitedPlace.html', {'customer': index,'customern':customer})
 def search(request):
     query=request.GET['query']
-    print(len(query))
     if len(query)>80 and len(query)==0:
         allpost=Index.objects.none()
     else:

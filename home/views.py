@@ -103,7 +103,6 @@ def customer(request):
             customer.save()
             return redirect('guide')
         customer = Customer_detail.objects.filter(user=request.user)
-        print(customer)
         ids = []
         for i in customer:
             ids.append(i.Customer_id)
